@@ -1,0 +1,12 @@
+[package]
+name = "are_we_web_yet"
+version = "0.1.0"
+authors = ["Mark Oleson <fusion2004@gmail.com>"]
+
+[dependencies]
+serde = "0.8"
+serde_json = "0.8"
+router = "*"
+
+[dependencies.iron]
+version = "*"
