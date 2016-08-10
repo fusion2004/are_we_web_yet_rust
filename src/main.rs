@@ -7,8 +7,8 @@ use iron::{Iron, Request, Response, IronResult};
 use iron::status;
 use router::Router;
 use serde_json::builder::ObjectBuilder;
-use serde_json::Map;
-use serde_json::value::Value;
+
+mod models;
 
 fn main() {
     let mut router = Router::new();
