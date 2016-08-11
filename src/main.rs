@@ -15,7 +15,12 @@ fn main() {
     router.get("/", handler);
     router.get("/users/:user_id", users_handler);
 
-    Iron::new(router).http("localhost:3001").unwrap();
+    let server_address = "localhost:3001";
+
+    match Iron::new(router).http(server_address) {
+        Ok(_) => println!("Listening on {}", server_address),
+        Err(error) => println!("Error starting server: {}", error)
+    }
 }
 
 fn handler(_: &mut Request) -> IronResult<Response> {
