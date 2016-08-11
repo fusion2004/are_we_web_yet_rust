@@ -7,6 +7,7 @@ authors = ["Mark Oleson <fusion2004@gmail.com>"]
 serde = "0.8"
 serde_json = "0.8"
 router = "*"
+clap = "2"
 
 [dependencies.iron]
 version = "*"

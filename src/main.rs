@@ -1,8 +1,10 @@
+extern crate clap;
 extern crate iron;
 extern crate router;
 extern crate serde;
 extern crate serde_json;
 
+use clap::{Arg, App};
 use iron::{Iron, Request, Response, IronResult};
 use iron::status;
 use router::Router;
@@ -11,14 +13,27 @@ use serde_json::builder::ObjectBuilder;
 mod models;
 
 fn main() {
+    let arg_matches = App::new("are_we_web_yet")
+        .version("0.1")
+        .author("Mark O. <fusion2004@gmail.com>")
+        .about("Runs a simple web service")
+        .arg(Arg::with_name("port")
+            .short("p")
+            .long("port")
+            .value_name("PORT")
+            .help("Run on the specified port\n Default: 3000")
+            .takes_value(true))
+        .get_matches();
+
     let mut router = Router::new();
     router.get("/", handler);
     router.get("/users/:user_id", users_handler);
 
-    let server_address = "localhost:3001";
+    let port = arg_matches.value_of("port").unwrap_or("3000").parse::<u16>().unwrap();
+    let binding = "localhost";
 
-    match Iron::new(router).http(server_address) {
-        Ok(_) => println!("Listening on {}", server_address),
+    match Iron::new(router).http((binding, port)) {
+        Ok(_) => println!("Listening on {}:{}", binding, port),
         Err(error) => println!("Error starting server: {}", error)
     }
 }
