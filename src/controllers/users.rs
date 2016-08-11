@@ -4,7 +4,7 @@ use router::Router;
 use serde_json;
 use serde_json::builder::ObjectBuilder;
 
-pub fn handler(req: &mut Request) -> IronResult<Response> {
+pub fn show_handler(req: &mut Request) -> IronResult<Response> {
     let ref user_id = req.extensions.get::<Router>().unwrap().find("user_id").unwrap_or("/");
 
     let mut attributes = ObjectBuilder::new();
