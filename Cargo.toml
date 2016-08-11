@@ -8,6 +8,8 @@ serde = "0.8"
 serde_json = "0.8"
 router = "*"
 clap = "2"
+chan = "0.1"
+chan-signal = "0.1"
 
 [dependencies.iron]
 version = "*"
