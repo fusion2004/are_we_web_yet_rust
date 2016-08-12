@@ -1,4 +1,4 @@
-use iron::{Request, Response, IronResult};
+use iron::prelude::*;
 use iron::status;
 use router::Router;
 use serde_json;

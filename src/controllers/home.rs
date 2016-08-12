@@ -1,4 +1,4 @@
-use iron::{Request, Response, IronResult};
+use iron::prelude::*;
 use iron::status;
 
 pub fn handler(_: &mut Request) -> IronResult<Response> {
