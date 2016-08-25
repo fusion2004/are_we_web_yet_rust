@@ -11,6 +11,10 @@ logger = "*"
 clap = "2"
 chan = "0.1"
 chan-signal = "0.1"
+diesel = "0.7.2"
+diesel_codegen = { version = "0.7.2", default-features = false, features = ["nightly", "postgres"] }
+dotenv = "0.8.0"
+dotenv_macros = "0.9.0"
 
 [dependencies.iron]
 version = "*"
