@@ -3,6 +3,30 @@ use iron::status;
 use router::Router;
 use serde_json;
 use serde_json::builder::ObjectBuilder;
+use diesel::prelude::*;
+
+use connection;
+use models::*;
+
+pub fn index_handler(req: &mut Request) -> IronResult<Response> {
+    use schema::users::dsl::*;
+
+    let connection = connection::establish_connection();
+
+    let results = users.limit(5)
+        .load::<User>(&connection)
+        .expect("Error loading users");
+
+    println!("Displaying {} users", results.len());
+    for user in results {
+        println!("{}", user.id);
+        println!("----------\n");
+        println!("{}", user.name);
+        println!("{}", user.email);
+    }
+
+    Ok(Response::with((status::Ok, "")))
+}
 
 pub fn show_handler(req: &mut Request) -> IronResult<Response> {
     let ref user_id = req.extensions.get::<Router>().unwrap().find("user_id").unwrap_or("/");
