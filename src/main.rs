@@ -6,6 +6,7 @@ extern crate chan;
 
 #[macro_use]
 extern crate diesel;
+extern crate dotenv;
 
 extern crate chan_signal;
 extern crate clap;
@@ -20,11 +21,11 @@ use clap::{Arg, App};
 use iron::prelude::*;
 use logger::Logger;
 
-mod controllers;
-
+mod connection;
 mod schema;
 mod models;
 
+mod controllers;
 mod routes;
 
 fn main() {
