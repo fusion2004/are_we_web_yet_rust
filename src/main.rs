@@ -1,5 +1,12 @@
+#![feature(custom_derive, custom_attribute, plugin)]
+#![plugin(diesel_codegen, dotenv_macros)]
+
 #[macro_use]
 extern crate chan;
+
+#[macro_use]
+extern crate diesel;
+
 extern crate chan_signal;
 extern crate clap;
 extern crate iron;
@@ -14,7 +21,10 @@ use iron::prelude::*;
 use logger::Logger;
 
 mod controllers;
+
+mod schema;
 mod models;
+
 mod routes;
 
 fn main() {
