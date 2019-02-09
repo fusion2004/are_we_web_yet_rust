@@ -8,24 +8,23 @@ extern crate clap;
 extern crate gotham;
 extern crate serde;
 extern crate serde_json;
+extern crate log;
+extern crate env_logger;
 
 use clap::{Arg, App};
+use dotenv::dotenv;
 use gotham::state::State;
 
-// mod connection;
-// mod schema;
-// mod models;
-//
-// mod controllers;
-// mod routes;
-
-const HELLO_WORLD: &'static str = "Hello World!";
-
-pub fn say_hello(state: State) -> (State, &'static str) {
-    (state, HELLO_WORLD)
-}
+mod connection;
+mod schema;
+mod models;
+mod handlers;
+mod routes;
 
 fn main() {
+    dotenv().ok();
+    env_logger::init();
+
     let arg_matches = App::new("are_we_web_yet")
         .version("0.2.0")
         .author("Mark O. <fusion2004@gmail.com>")
@@ -39,12 +38,9 @@ fn main() {
         .get_matches();
 
     let port = arg_matches.value_of("port").unwrap_or("3000").parse::<u16>().unwrap();
-    let binding = "localhost";
-    // let addr = "127.0.0.1:7878";
     let addr = format!("127.0.0.1:{}", port);
 
-    println!("Listening on http://{}", addr);
-    gotham::start(addr, || Ok(say_hello));
+    gotham::start(addr, routes::router());
 }
 
 // fn main() {
