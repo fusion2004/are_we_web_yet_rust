@@ -1,20 +1,12 @@
 [package]
 name = "are_we_web_yet"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Mark Oleson <fusion2004@gmail.com>"]
 
 [dependencies]
-serde = "0.8"
-serde_json = "0.8"
-router = "*"
-logger = "*"
 clap = "2"
-chan = "0.1"
-chan-signal = "0.1"
-diesel = "0.7.0"
-diesel_codegen = { version = "0.7.0", features = ["postgres"] }
-dotenv = "0.8.0"
-dotenv_macros = "0.9.0"
-
-[dependencies.iron]
-version = "*"
+diesel = { version = "1.4", features = ["postgres"] }
+dotenv = "0.13.0"
+gotham = "0.3"
+serde = "1.0"
+serde_json = "1.0"
