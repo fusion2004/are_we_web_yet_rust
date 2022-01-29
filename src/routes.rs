@@ -21,11 +21,11 @@ pub fn router() -> Router {
     build_router(chain, pipelines, |route| {
         route.get_or_head("/").to(home::handler);
 
-        // route.scope("/users", |route| {
-        //     route.get("/").to(users::index_handler);
-        //     route.get("/:user_id")
-        //         .with_path_extractor::<UserPathParams>()
-        //         .to(user::show_handler);
-        // });
+        route.scope("/users", |route| {
+            route.get("/").to(users::index);
+            // route.get("/:user_id")
+            //     .with_path_extractor::<UserPathParams>()
+            //     .to(user::show_handler);
+        });
     })
 }
